@@ -9,28 +9,5 @@
 
   grid-template-rows: 60px 1fr;
   grid-template-columns: 2fr 10fr;
-  /* grid-gap: 10px; */
-}
-
-.header {
-  grid-area: head;
-  background-color: rgba(97, 97, 97, 0.291);
-}
-.header img {
-  width: 30px;
-}
-
-.nav {
-  grid-area: nav;
-  background-color: rgba(151, 151, 151, 0.291);
-}
-
-.nav div a {
-  text-decoration: none;
-  color: black;
-}
-
-.content {
-  grid-area: cont;
-  background-color: rgba(217, 217, 217, 0.291);
+  grid-gap: 10px;
 }

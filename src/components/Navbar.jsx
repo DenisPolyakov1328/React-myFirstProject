@@ -1,6 +1,8 @@
+import nav from './Navbar.module.css';
+
 const Navbar = () => {
   return (
-    <nav className="nav">
+    <nav className={nav.nav}>
       <div>
         <a href="#s">Profile</a>
       </div>
