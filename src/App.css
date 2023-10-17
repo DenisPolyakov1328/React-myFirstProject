@@ -11,3 +11,8 @@
   grid-template-columns: 2fr 10fr;
   grid-gap: 10px;
 }
+
+.app-content-profile {
+  grid-area: cont;
+  background-color: rgba(217, 217, 217, 0.291);
+}
