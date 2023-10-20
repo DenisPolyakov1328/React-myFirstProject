@@ -1,6 +1,12 @@
 import cont from "./MyPosts.module.css";
 import Post from "./Post/Posts";
 
+// Массив данных с постами
+const postData = [
+  {id: '1', message: 'Я учу реакт', likecount: '153'},
+  {id: '2', message: 'Закончил институт', likecount: '35'}
+];
+
 const MyPosts = () => {
   return (
     <div className={cont.postsBlock}>
@@ -14,8 +20,8 @@ const MyPosts = () => {
         </div>
       </div>
       <div className={cont.post}>
-        <Post message="Я учу реакт" count="20" />
-        <Post message="Закончил институт" count="30" />
+        <Post message={postData[0].message} likeCount={postData[0].likecount} />
+        <Post message={postData[1].message} likeCount={postData[1].likecount} />
       </div>
     </div>
   );
