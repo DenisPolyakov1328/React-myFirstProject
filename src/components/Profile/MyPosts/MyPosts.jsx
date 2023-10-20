@@ -3,9 +3,14 @@ import Post from "./Post/Posts";
 
 // Массив данных с постами
 const postData = [
-  {id: '1', message: 'Я учу реакт', likecount: '153'},
-  {id: '2', message: 'Закончил институт', likecount: '35'}
+  { id: "1", message: "Я учу реакт", likecount: "153" },
+  { id: "2", message: "Закончил институт", likecount: "35" },
 ];
+
+// Упрощаем код чтобы не множить компоненты/теги
+const postsElements = postData.map((post) => (
+  <Post message={post.message} likeCount={post.likecount} key={post.id} />
+));
 
 const MyPosts = () => {
   return (
@@ -19,10 +24,7 @@ const MyPosts = () => {
           <button>Add post</button>
         </div>
       </div>
-      <div className={cont.post}>
-        <Post message={postData[0].message} likeCount={postData[0].likecount} />
-        <Post message={postData[1].message} likeCount={postData[1].likecount} />
-      </div>
+      <div className={cont.post}>{postsElements}</div>
     </div>
   );
 };

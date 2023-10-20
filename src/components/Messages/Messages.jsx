@@ -28,33 +28,28 @@ const dialogData = [
 
 // Массив данных сообщений
 const messageData = [
-  {id: '1', message: 'Как дела?'},
-  {id: '2', message: 'Привет'},
-  {id: '3', message: 'Все хорошо, ты как?'},
-  {id: '4', message: 'С др'},
-  {id: '5', message: 'Увидимся'}
+  { id: "1", message: "Как дела?" },
+  { id: "2", message: "Привет" },
+  { id: "3", message: "Все хорошо, ты как?" },
+  { id: "4", message: "С др" },
+  { id: "5", message: "Увидимся" },
 ];
+
+// Упрощаем код чтобы не множить компоненты/теги
+const dilogsElements = dialogData.map((dialog) => (
+  <DilogsItems name={dialog.name} key={dialog.id} id={dialog.id}/>
+));
+
+// Упрощаем код чтобы не множить компоненты/теги
+const messagesElements = messageData.map((message) => (
+  <Message message={message.message} key={message.id} id={message.id}/>
+));
 
 const Messages = () => {
   return (
     <div className={contMess.content}>
-      <div className={contMess.dialogsItems}>
-        <DilogsItems name={dialogData[0].name} id={dialogData[0].id} />
-        <DilogsItems name={dialogData[1].name} id={dialogData[1].id} />
-        <DilogsItems name={dialogData[2].name} id={dialogData[2].id} />
-        <DilogsItems name={dialogData[3].name} id={dialogData[3].id} />
-        <DilogsItems name={dialogData[4].name} id={dialogData[4].id} />
-        <DilogsItems name={dialogData[5].name} id={dialogData[5].id} />
-        <DilogsItems name={dialogData[6].name} id={dialogData[6].id} />
-        <DilogsItems name={dialogData[7].name} id={dialogData[7].id} />
-      </div>
-      <div className={contMess.messages}>
-        <Message message={messageData[0].message} />
-        <Message message={messageData[1].message} />
-        <Message message={messageData[2].message} />
-        <Message message={messageData[3].message} />
-        <Message message={messageData[4].message} />
-      </div>
+      <div className={contMess.dialogsItems}>{dilogsElements}</div>
+      <div className={contMess.messages}>{messagesElements}</div>
     </div>
   );
 };
