@@ -7,19 +7,6 @@
   font-size: 20px;
 }
 
-.dialogsItems .dialog {
-  padding: 5px;
-}
-
-.dialogsItems .active {
-  color: rgb(43, 118, 143);
-  font-weight: bold;
- }
-
 .messages {
   font-size: 15px;
-}
-
-.messages .message {
-  padding: 10px;
 }

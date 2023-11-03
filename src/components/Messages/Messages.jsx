@@ -1,18 +1,6 @@
 import contMess from "./Messages.module.css";
-import { NavLink } from "react-router-dom";
-
-const DilogsItems = (props) => {
-  let path = "/messages/" + props.id;
-  return (
-    <div className={`${contMess.dialog} ${contMess.active}`}>
-      <NavLink to={path}>{props.name}</NavLink>
-    </div>
-  );
-};
-
-const Message = (props) => {
-  return <div className={contMess.message}>{props.message}</div>;
-};
+import DialogItem from "./Dialog/DialogItem";
+import Message from "./Message/Message";
 
 // Массив данных друзей
 const dialogData = [
@@ -37,7 +25,7 @@ const messageData = [
 
 // Упрощаем код чтобы не множить компоненты/теги
 const dilogsElements = dialogData.map((dialog) => (
-  <DilogsItems name={dialog.name} key={dialog.id} id={dialog.id}/>
+  <DialogItem name={dialog.name} key={dialog.id} id={dialog.id}/>
 ));
 
 // Упрощаем код чтобы не множить компоненты/теги
