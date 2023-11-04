@@ -4,12 +4,12 @@ import Message from "./Message/Message";
 
 const Messages = (props) => {
   // Упрощаем код чтобы не множить компоненты/теги
-  const dilogsElements = props.dialogData.map((dialog) => (
+  const dilogsElements = props.messagePage.dialogData.map((dialog) => (
     <DialogItem name={dialog.name} key={dialog.id} id={dialog.id} />
   ));
 
   // Упрощаем код чтобы не множить компоненты/теги
-  const messagesElements = props.messageData.map((message) => (
+  const messagesElements = props.messagePage.messageData.map((message) => (
     <Message message={message.message} key={message.id} id={message.id} />
   ));
 
