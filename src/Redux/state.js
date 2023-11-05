@@ -24,6 +24,13 @@ const state = {
       { id: "2", message: "Закончил институт", likecount: "35" },
     ],
   },
+  sideBar: {
+    friendsData: [
+        { id: "1", name: "Дарья" },
+        { id: "2", name: "Буся" },
+        { id: "3", name: "Анастасия" },
+    ],
+  },
 };
 
 export default state;

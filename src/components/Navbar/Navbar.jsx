@@ -1,9 +1,13 @@
 import { NavLink } from "react-router-dom"; // Импортируем компоненту navlink из пакета router-dom
+import SideBar from "./../Sidebar/Sidebar"; // Импорт отдельной компоненты с друзьями
 import nav from "./Navbar.module.css"; // Импортруем стили для данной компоненты
 
-const setActive = navData => navData.isActive ? nav.active : nav.item; // Функция для создания активного класса ссылке и переключения его впоследствии
 
-const Navbar = () => { 
+
+const Navbar = (props) => { 
+  
+  const setActive = navData => navData.isActive ? nav.active : nav.item; // Функция для создания активного класса ссылке и переключения его впоследствии
+  
   return (
     <nav className={nav.nav}>
       <div className={nav.item}>
@@ -21,6 +25,7 @@ const Navbar = () => {
       <div className={nav.item}>
         <NavLink to="/settings" className={setActive}>Settings</NavLink>
       </div>
+      <SideBar sidebarData={props.state.sideBar}/>
     </nav>
   );
 };
