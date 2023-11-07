@@ -1,3 +1,4 @@
+import React from "react";
 import cont from "./MyPosts.module.css";
 import Post from "./Post/Posts";
 
@@ -9,15 +10,24 @@ const MyPosts = (props) => {
     <Post message={post.message} likeCount={post.likecount} key={post.id} />
   ));
 
+  // ссылка на тег textarea
+  const newPostElement = React.createRef();
+
+  // обработка значения введенного в textarea
+  const addPost = () => {
+    let text = newPostElement.current.value;
+    alert(text);
+  }
+
   return (
     <div className={cont.postsBlock}>
       <h3>My posts</h3>
       <div>
         <div>
-          <textarea></textarea>
+          <textarea ref={newPostElement}></textarea>
         </div>
         <div>
-          <button>Add post</button>
+          <button onClick={addPost}>Add post</button>
         </div>
       </div>
       <div className={cont.post}>{postsElements}</div>
