@@ -1,3 +1,5 @@
+import { renderEntireTree } from './../render';
+
 const state = {
   massagePage: {
     dialogData: [
@@ -31,6 +33,19 @@ const state = {
         { id: "3", name: "Анастасия" },
     ],
   },
+};
+
+// Callback для взаимодействия с textarea на странице профиля и добавления новых постов. Т.е. добавляем новый пост в state и на страницу
+export const addPost = (newPost) => {
+  let post = {
+    id: 3,
+    message: newPost,
+    likecount: '0'
+  }
+
+  state.profilePage.postData.push(post);
+
+  renderEntireTree(state);
 };
 
 export default state;

@@ -14,9 +14,9 @@ const MyPosts = (props) => {
   const newPostElement = React.createRef();
 
   // обработка значения введенного в textarea
-  const addPost = () => {
+  const addPostText = () => {
     let text = newPostElement.current.value;
-    alert(text);
+    props.addPost(text);
   }
 
   return (
@@ -27,7 +27,7 @@ const MyPosts = (props) => {
           <textarea ref={newPostElement}></textarea>
         </div>
         <div>
-          <button onClick={addPost}>Add post</button>
+          <button onClick={addPostText}>Add post</button>
         </div>
       </div>
       <div className={cont.post}>{postsElements}</div>
