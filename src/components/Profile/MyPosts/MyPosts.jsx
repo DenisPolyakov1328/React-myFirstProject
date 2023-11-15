@@ -15,8 +15,13 @@ const MyPosts = (props) => {
 
   // обработка значения введенного в textarea
   const addPostText = () => {
+    props.addPost();
+  }
+
+  // Функция обработчик события onChange на textarea
+  const onPostChange = () => {
     let text = newPostElement.current.value;
-    props.addPost(text);
+    props.updateNewPostText(text);
   }
 
   return (
@@ -24,7 +29,7 @@ const MyPosts = (props) => {
       <h3>My posts</h3>
       <div>
         <div>
-          <textarea ref={newPostElement}></textarea>
+          <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
         </div>
         <div>
           <button onClick={addPostText}>Add post</button>

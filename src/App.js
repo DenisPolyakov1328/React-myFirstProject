@@ -7,7 +7,6 @@ import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { addPost } from "./Redux/state";
 
 function App(props) {
   return (
@@ -17,7 +16,11 @@ function App(props) {
         <Navbar state={props.state}/>
         <div className="app-wrapper-content">
           <Routes>
-            <Route path="/profile" element={<Profile profilePage={props.state.profilePage} addPost={addPost}/>} />
+            <Route path="/profile" element={<Profile 
+              profilePage={props.state.profilePage} 
+              addPost={props.addPost}
+              updateNewPostText={props.updateNewPostText}
+            />} />
             <Route path="/messages/*" element={<Messages messagePage={props.state.massagePage} />} />
             <Route path="/music" element={<Music />} />
             <Route path="/news" element={<News />} />

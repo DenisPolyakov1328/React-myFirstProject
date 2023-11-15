@@ -21,6 +21,7 @@ const state = {
     ],
   },
   profilePage: {
+    newPostText: 'TaTaTaTa',
     postData: [
       { id: "1", message: "Я учу реакт", likecount: "153" },
       { id: "2", message: "Закончил институт", likecount: "35" },
@@ -36,15 +37,21 @@ const state = {
 };
 
 // Callback для взаимодействия с textarea на странице профиля и добавления новых постов. Т.е. добавляем новый пост в state и на страницу
-export const addPost = (newPost) => {
+export const addPost = () => {
   let post = {
     id: 3,
-    message: newPost,
+    message: state.profilePage.newPostText,
     likecount: '0'
   }
 
   state.profilePage.postData.push(post);
+  state.profilePage.newPostText = '';
+  renderEntireTree(state);
+};
 
+// Функция для добавления каждого символа введенного в textarea в state
+export const updateNewPostText = (newText) => {
+  state.profilePage.newPostText = newText;
   renderEntireTree(state);
 };
 
