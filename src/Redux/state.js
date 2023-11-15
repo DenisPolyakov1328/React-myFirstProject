@@ -1,4 +1,6 @@
-import { renderEntireTree } from './../render';
+let rerenderEntireTree = () => {
+  console.log('state changed');
+};
 
 const state = {
   massagePage: {
@@ -46,13 +48,19 @@ export const addPost = () => {
 
   state.profilePage.postData.push(post);
   state.profilePage.newPostText = '';
-  renderEntireTree(state);
+  rerenderEntireTree(state);
 };
 
 // Функция для добавления каждого символа введенного в textarea в state
 export const updateNewPostText = (newText) => {
   state.profilePage.newPostText = newText;
-  renderEntireTree(state);
+  rerenderEntireTree(state);
 };
+
+
+// Паттерн наблюдатель. перезагрузили страницу, функция коллбек чтобы избавится от файла рендер 
+export const subscribe = (observer) => {
+  rerenderEntireTree = observer;
+}
 
 export default state;
