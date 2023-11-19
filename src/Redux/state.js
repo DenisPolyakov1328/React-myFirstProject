@@ -1,5 +1,4 @@
 let store = {
-
   _state: {
     massagePage: {
       dialogData: [
@@ -21,7 +20,7 @@ let store = {
       ],
     },
     profilePage: {
-      newPostText: 'TaTaTaTa',
+      newPostText: "TaTaTaTa",
       postData: [
         { id: "1", message: "Я учу реакт", likecount: "153" },
         { id: "2", message: "Закончил институт", likecount: "35" },
@@ -29,40 +28,42 @@ let store = {
     },
     sideBar: {
       friendsData: [
-          { id: "1", name: "Дарья" },
-          { id: "2", name: "Буся" },
-          { id: "3", name: "Анастасия" },
+        { id: "1", name: "Дарья" },
+        { id: "2", name: "Буся" },
+        { id: "3", name: "Анастасия" },
       ],
     },
   },
+  // Переменная заглушка, для функции ререндер
+  _cullSibscriber() {
+    console.log("state changed");
+  },
+
   getState() {
     return this._state;
   },
-  // Переменная заглушка, для функции ререндер
-  _cullSibscriber() {
-    console.log('state changed');
-  },
-  // Callback для взаимодействия с textarea на странице профиля и добавления новых постов. Т.е. добавляем новый пост в state и на страницу
-  addPost() {
-    let post = {
-      id: 3,
-      message: this._state.profilePage.newPostText,
-      likecount: '0'
-    }
-  
-    this._state.profilePage.postData.push(post);
-    this._state.profilePage.newPostText = '';
-    this._cullSibscriber(this._state);
-  },
-  // Функция для добавления каждого символа введенного в textarea в state
-  updateNewPostText (newText) {
-    this._state.profilePage.newPostText = newText;
-    this._cullSibscriber(this._state);
-  },
-  // Паттерн наблюдатель. перезагрузили страницу, функция коллбек чтобы избавится от файла рендер 
-  subscribe (observer) {
+  // Паттерн наблюдатель. перезагрузили страницу, функция коллбек чтобы избавится от файла рендер
+  subscribe(observer) {
     this._cullSibscriber = observer;
-  }
+  },
+
+  dispatch(action) { // Объединили функции в dispatch, для удобного их дальнейшего использования
+    if (action.type === "ADD-POST") {
+      // Callback для взаимодействия с textarea на странице профиля и добавления новых постов. Т.е. добавляем новый пост в state и на страницу
+      let post = {
+        id: 3,
+        message: this._state.profilePage.newPostText,
+        likecount: "0",
+      };
+
+      this._state.profilePage.postData.push(post);
+      this._state.profilePage.newPostText = "";
+      this._cullSibscriber(this._state);
+    } else if (action.type === "UPDATE-NEW-POST-TEXT") { // Функция для добавления каждого символа введенного в textarea в state
+      this._state.profilePage.newPostText = action.newText;
+      this._cullSibscriber(this._state);
+    }
+  },
 };
 
 export default store;

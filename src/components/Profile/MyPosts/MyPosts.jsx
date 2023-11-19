@@ -15,13 +15,13 @@ const MyPosts = (props) => {
 
   // обработка значения введенного в textarea
   const addPostText = () => {
-    props.addPost();
+    props.dispatch( { type: 'ADD-POST'} );
   }
 
   // Функция обработчик события onChange на textarea
   const onPostChange = () => {
     let text = newPostElement.current.value;
-    props.updateNewPostText(text);
+    props.dispatch( { type: 'UPDATE-NEW-POST-TEXT', newText: text} );
   }
 
   return (
