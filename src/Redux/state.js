@@ -1,6 +1,5 @@
-let rerenderEntireTree = () => {
-  console.log('state changed');
-};
+// Переменная заглушка, для функции ререндер
+let rerenderEntireTree = '';
 
 const state = {
   massagePage: {
