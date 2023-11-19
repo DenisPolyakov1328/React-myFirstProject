@@ -1,65 +1,68 @@
-// Переменная заглушка, для функции ререндер
-let rerenderEntireTree = '';
+let store = {
 
-const state = {
-  massagePage: {
-    dialogData: [
-      { id: "1", name: "Дарья" },
-      { id: "2", name: "Буся" },
-      { id: "3", name: "Анастасия" },
-      { id: "4", name: "Анна" },
-      { id: "5", name: "Артем" },
-      { id: "6", name: "Тосик" },
-      { id: "7", name: "Никита" },
-      { id: "8", name: "Саша" },
-    ],
-    messageData: [
-      { id: "1", message: "Как дела?" },
-      { id: "2", message: "Привет" },
-      { id: "3", message: "Все хорошо, ты как?" },
-      { id: "4", message: "С др" },
-      { id: "5", message: "Увидимся" },
-    ],
-  },
-  profilePage: {
-    newPostText: 'TaTaTaTa',
-    postData: [
-      { id: "1", message: "Я учу реакт", likecount: "153" },
-      { id: "2", message: "Закончил институт", likecount: "35" },
-    ],
-  },
-  sideBar: {
-    friendsData: [
+  _state: {
+    massagePage: {
+      dialogData: [
         { id: "1", name: "Дарья" },
         { id: "2", name: "Буся" },
         { id: "3", name: "Анастасия" },
-    ],
+        { id: "4", name: "Анна" },
+        { id: "5", name: "Артем" },
+        { id: "6", name: "Тосик" },
+        { id: "7", name: "Никита" },
+        { id: "8", name: "Саша" },
+      ],
+      messageData: [
+        { id: "1", message: "Как дела?" },
+        { id: "2", message: "Привет" },
+        { id: "3", message: "Все хорошо, ты как?" },
+        { id: "4", message: "С др" },
+        { id: "5", message: "Увидимся" },
+      ],
+    },
+    profilePage: {
+      newPostText: 'TaTaTaTa',
+      postData: [
+        { id: "1", message: "Я учу реакт", likecount: "153" },
+        { id: "2", message: "Закончил институт", likecount: "35" },
+      ],
+    },
+    sideBar: {
+      friendsData: [
+          { id: "1", name: "Дарья" },
+          { id: "2", name: "Буся" },
+          { id: "3", name: "Анастасия" },
+      ],
+    },
   },
-};
-
-// Callback для взаимодействия с textarea на странице профиля и добавления новых постов. Т.е. добавляем новый пост в state и на страницу
-export const addPost = () => {
-  let post = {
-    id: 3,
-    message: state.profilePage.newPostText,
-    likecount: '0'
+  getState() {
+    return this._state;
+  },
+  // Переменная заглушка, для функции ререндер
+  _cullSibscriber() {
+    console.log('state changed');
+  },
+  // Callback для взаимодействия с textarea на странице профиля и добавления новых постов. Т.е. добавляем новый пост в state и на страницу
+  addPost() {
+    let post = {
+      id: 3,
+      message: this._state.profilePage.newPostText,
+      likecount: '0'
+    }
+  
+    this._state.profilePage.postData.push(post);
+    this._state.profilePage.newPostText = '';
+    this._cullSibscriber(this._state);
+  },
+  // Функция для добавления каждого символа введенного в textarea в state
+  updateNewPostText (newText) {
+    this._state.profilePage.newPostText = newText;
+    this._cullSibscriber(this._state);
+  },
+  // Паттерн наблюдатель. перезагрузили страницу, функция коллбек чтобы избавится от файла рендер 
+  subscribe (observer) {
+    this._cullSibscriber = observer;
   }
-
-  state.profilePage.postData.push(post);
-  state.profilePage.newPostText = '';
-  rerenderEntireTree(state);
 };
 
-// Функция для добавления каждого символа введенного в textarea в state
-export const updateNewPostText = (newText) => {
-  state.profilePage.newPostText = newText;
-  rerenderEntireTree(state);
-};
-
-
-// Паттерн наблюдатель. перезагрузили страницу, функция коллбек чтобы избавится от файла рендер 
-export const subscribe = (observer) => {
-  rerenderEntireTree = observer;
-}
-
-export default state;
+export default store;
