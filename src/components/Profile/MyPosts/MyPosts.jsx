@@ -1,6 +1,7 @@
 import React from "react";
 import cont from "./MyPosts.module.css";
 import Post from "./Post/Posts";
+import { addPostActionCreator, updateNewPostTextActionCreator } from './../../../Redux/state'
 
 
 
@@ -15,13 +16,13 @@ const MyPosts = (props) => {
 
   // обработка значения введенного в textarea
   const addPostText = () => {
-    props.dispatch( { type: 'ADD-POST'} );
+    props.dispatch( addPostActionCreator() );
   }
 
   // Функция обработчик события onChange на textarea
   const onPostChange = () => {
     let text = newPostElement.current.value;
-    props.dispatch( { type: 'UPDATE-NEW-POST-TEXT', newText: text} );
+    props.dispatch( updateNewPostTextActionCreator(text) );
   }
 
   return (
