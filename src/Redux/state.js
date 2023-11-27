@@ -1,8 +1,6 @@
-// просто переменные чтобы избавится от строк в коде
-const ADD_POST = 'ADD-POST'; 
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const ADD_MESSAGE = 'ADD-MESSAGE'; 
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+import messageReducer from './message-reducer.js';
+import profileReducer from './profile-reducer.js';
+import sidebarReducer from './sidebar-reducer.js';
 
 let store = {
   _state: {
@@ -55,39 +53,13 @@ let store = {
   },
 
   dispatch(action) { // Объединили функции в dispatch, для удобного их дальнейшего использования
-    if (action.type === ADD_POST) {
-      // Callback для взаимодействия с textarea на странице профиля и добавления новых постов. Т.е. добавляем новый пост в state и на страницу
-      let post = {
-        id: 3,
-        message: this._state.profilePage.newPostText,
-        likecount: "0",
-      };
 
-      this._state.profilePage.postData.push(post);
-      this._state.profilePage.newPostText = ""; // зануляем поле ввода
-      this._cullSibscriber(this._state);
-    } else if (action.type === UPDATE_NEW_POST_TEXT) { // Функция для добавления каждого символа введенного в textarea в state
-      this._state.profilePage.newPostText = action.newText;
-      this._cullSibscriber(this._state);
-    } else if (action.type === ADD_MESSAGE) {
-      let message = {
-        id: '6',
-        message: this._state.massagePage.newMessageText
-      }
-      this._state.massagePage.messageData.push(message);
-      this._state.massagePage.newMessageText = "";
-      this._cullSibscriber(this._state);
-    } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-      this._state.massagePage.newMessageText = action.newText;
-      this._cullSibscriber(this._state);
-    }
-  },
+    this._state.profilePage = profileReducer(this._state.profilePage, action);
+    this._state.massagePage = messageReducer(this._state.massagePage, action);
+    this._state.sideBar = sidebarReducer(this._state.sideBar, action);
+
+    this._cullSibscriber(this._state);
+  }
 };
-
-// actionCreator-ы созданны для того что бы диспатчить экшен на бизнес уровне в файле стейт, следовательно передаем вызов этих функций в компоненту. В теле функции возвращаются свойства ation. Все идет из бизнеса, в UI ничего не делаем 
-export const addPostActionCreator = () => ({ type: ADD_POST });
-export const updateNewPostTextActionCreator = (text) => ({ type: UPDATE_NEW_POST_TEXT, newText: text });
-export const addMessageActionCreator = () => ({ type: ADD_MESSAGE });
-export const updateNewMassageTextActionCreator = (text) => ({ type: UPDATE_NEW_MESSAGE_TEXT, newText: text });
 
 export default store;

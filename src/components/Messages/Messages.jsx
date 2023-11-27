@@ -2,7 +2,7 @@ import React from "react";
 import contMess from "./Messages.module.css";
 import DialogItem from "./Dialog/DialogItem";
 import Message from "./Message/Message";
-import {addMessageActionCreator, updateNewMassageTextActionCreator} from './../../Redux/state'
+import {addMessageActionCreator, updateNewMassageTextActionCreator} from './../../Redux/message-reducer'
 
 const Messages = (props) => {
   // Упрощаем код чтобы не множить компоненты/теги
