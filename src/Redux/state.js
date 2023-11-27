@@ -1,6 +1,8 @@
 // просто переменные чтобы избавится от строк в коде
 const ADD_POST = 'ADD-POST'; 
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const ADD_MESSAGE = 'ADD-MESSAGE'; 
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 
 let store = {
   _state: {
@@ -15,6 +17,7 @@ let store = {
         { id: "7", name: "Никита" },
         { id: "8", name: "Саша" },
       ],
+      newMessageText: "",
       messageData: [
         { id: "1", message: "Как дела?" },
         { id: "2", message: "Привет" },
@@ -61,10 +64,21 @@ let store = {
       };
 
       this._state.profilePage.postData.push(post);
-      this._state.profilePage.newPostText = "";
+      this._state.profilePage.newPostText = ""; // зануляем поле ввода
       this._cullSibscriber(this._state);
     } else if (action.type === UPDATE_NEW_POST_TEXT) { // Функция для добавления каждого символа введенного в textarea в state
       this._state.profilePage.newPostText = action.newText;
+      this._cullSibscriber(this._state);
+    } else if (action.type === ADD_MESSAGE) {
+      let message = {
+        id: '6',
+        message: this._state.massagePage.newMessageText
+      }
+      this._state.massagePage.messageData.push(message);
+      this._state.massagePage.newMessageText = "";
+      this._cullSibscriber(this._state);
+    } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
+      this._state.massagePage.newMessageText = action.newText;
       this._cullSibscriber(this._state);
     }
   },
@@ -73,5 +87,7 @@ let store = {
 // actionCreator-ы созданны для того что бы диспатчить экшен на бизнес уровне в файле стейт, следовательно передаем вызов этих функций в компоненту. В теле функции возвращаются свойства ation. Все идет из бизнеса, в UI ничего не делаем 
 export const addPostActionCreator = () => ({ type: ADD_POST });
 export const updateNewPostTextActionCreator = (text) => ({ type: UPDATE_NEW_POST_TEXT, newText: text });
+export const addMessageActionCreator = () => ({ type: ADD_MESSAGE });
+export const updateNewMassageTextActionCreator = (text) => ({ type: UPDATE_NEW_MESSAGE_TEXT, newText: text });
 
 export default store;

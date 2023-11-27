@@ -2,33 +2,35 @@ import React from "react";
 import contMess from "./Messages.module.css";
 import DialogItem from "./Dialog/DialogItem";
 import Message from "./Message/Message";
+import {addMessageActionCreator, updateNewMassageTextActionCreator} from './../../Redux/state'
 
 const Messages = (props) => {
   // Упрощаем код чтобы не множить компоненты/теги
   const dilogsElements = props.messagePage.dialogData.map((dialog) => (
     <DialogItem name={dialog.name} key={dialog.id} id={dialog.id} />
   ));
-
+  
   // Упрощаем код чтобы не множить компоненты/теги
   const messagesElements = props.messagePage.messageData.map((message) => (
     <Message message={message.message} key={message.id} id={message.id} />
   ));
 
-  // ссылка на тег textarea
-  const newSendMessage = React.createRef();
-
   // обработка значения введенного в textarea
   const sendMessage = () => {
-    let text = newSendMessage.current.value;
-    alert(text);
+    props.dispatch(addMessageActionCreator());
   };
+
+  const onMessageChange = (e) => {
+    let text = e.target.value;
+    props.dispatch(updateNewMassageTextActionCreator(text));
+  }
 
   return (
     <div className={contMess.content}>
       <div className={contMess.dialogsItems}>{dilogsElements}</div>
       <div className={contMess.messages}>{messagesElements}</div>
       <div>
-        <textarea ref={newSendMessage}></textarea>
+        <textarea onChange={onMessageChange} value={props.messagePage.newMessageText} placeholder='Enter your message'></textarea>
       </div>
       <div>
         <button onClick={sendMessage}>Send</button>
