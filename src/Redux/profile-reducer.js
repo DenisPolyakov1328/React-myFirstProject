@@ -1,7 +1,15 @@
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 
-const profileReducer = (state, action) => {
+const initialState = {
+    newPostText: "",
+    postData: [
+      { id: "1", message: "Я учу реакт", likecount: "153" },
+      { id: "2", message: "Закончил институт", likecount: "35" },
+    ],
+};
+
+const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     // Callback для взаимодействия с textarea на странице профиля и добавления новых постов. Т.е. добавляем новый пост в state и на страницу
     case ADD_POST:
