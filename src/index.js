@@ -5,8 +5,9 @@ import App from "./App";
 import store from "./Redux/redux-store";
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById("root")); // добавляем данные в index.html, чтобы отбразить страницу
 
+// Далее рендерим страницу подгружая главную компоненту App. Затем создали оболочку/функцию чтобы перерисовать UI после  изменения state
 let rerenderEntireTree = (state) => {
   root.render(
     <React.StrictMode>
@@ -15,7 +16,9 @@ let rerenderEntireTree = (state) => {
   );
 };
 
+// Вызываем функцию перерисовать и передаем в нее стор (наши данные)
 rerenderEntireTree(store.getState());
+// подписываемся на изменения стора и передаем функцию перерисовать
 store.subscribe(() => {
   let state = store.getState();
   rerenderEntireTree(state);

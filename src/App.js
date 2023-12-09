@@ -8,6 +8,7 @@ import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+// App - главная компонента, которая содержит в себе роутинг (переход по вкладкам приложения) и сами компоненты(отдельные "страницы" приложения)
 function App(props) {
   return (
     <BrowserRouter>

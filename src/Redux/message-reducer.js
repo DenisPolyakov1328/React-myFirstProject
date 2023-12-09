@@ -1,6 +1,7 @@
 const ADD_MESSAGE = "ADD-MESSAGE";
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
 
+// Начальные данные стейта, по-умолчанию
 const initialState = {
     dialogData: [
       { id: "1", name: "Дарья" },
@@ -22,6 +23,7 @@ const initialState = {
     ]
 };
 
+//Функция reducer в которую передаем параметры стейт и экшен. Создаются как отдельные файлы/модули, чтобы не рос код, так как функций dispatch будет много. По своей сути данная функция следит за изменением UI (полем ввода в textarea) и добавляет новые данные в стейт 
 const messageReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_MESSAGE:
