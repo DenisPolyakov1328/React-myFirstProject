@@ -1,7 +1,6 @@
 import React from "react";
 import cont from "./MyPosts.module.css";
 import Post from "./Post/Posts";
-import { addPostActionCreator, updateNewPostTextActionCreator } from './../../../Redux/profile-reducer'
 
 
 
@@ -16,13 +15,13 @@ const MyPosts = (props) => {
 
   // обработка значения введенного в textarea
   const addPostText = () => {
-    props.dispatch( addPostActionCreator() );
+    props.addPost();
   }
 
   // Функция обработчик события onChange на textarea
   const onPostChange = () => {
     let text = newPostElement.current.value;
-    props.dispatch( updateNewPostTextActionCreator(text) );
+    props.updateNewPostText(text);
   }
 
   return (

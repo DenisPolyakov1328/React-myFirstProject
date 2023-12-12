@@ -2,7 +2,6 @@ import React from "react";
 import contMess from "./Messages.module.css";
 import DialogItem from "./Dialog/DialogItem";
 import Message from "./Message/Message";
-import {addMessageActionCreator, updateNewMassageTextActionCreator} from './../../Redux/message-reducer'
 
 const Messages = (props) => {
   // Упрощаем код чтобы не множить компоненты/теги
@@ -17,12 +16,12 @@ const Messages = (props) => {
 
   // обработка значения введенного в textarea
   const sendMessage = () => {
-    props.dispatch(addMessageActionCreator());
+    props.addMessage();
   };
 
   const onMessageChange = (e) => {
     let text = e.target.value;
-    props.dispatch(updateNewMassageTextActionCreator(text));
+    props.updateNewMessageText(text);
   }
 
   return (

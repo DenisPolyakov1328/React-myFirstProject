@@ -2,7 +2,7 @@ import "./App.css";
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
-import Messages from "./components/Messages/Messages";
+import MessagesContainer from "./components/Messages/MessagesContainer";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
@@ -14,14 +14,14 @@ function App(props) {
     <BrowserRouter>
       <div className="app-wrapper">
         <Header />
-        <Navbar state={props.state}/>
+        <Navbar state={props.state} />
         <div className="app-wrapper-content">
           <Routes>
-            <Route path="/profile" element={<Profile 
-              profilePage={props.state.profilePage} 
-              dispatch={props.dispatch}
-            />} />
-            <Route path="/messages/*" element={<Messages messagePage={props.state.messagePage} dispatch={props.dispatch}/>} />
+            <Route path="/profile" element={<Profile store={props.store} />} />
+            <Route
+              path="/messages/*"
+              element={<MessagesContainer store={props.store} />}
+            />
             <Route path="/music" element={<Music />} />
             <Route path="/news" element={<News />} />
             <Route path="/settings" element={<Settings />} />
