@@ -9,18 +9,18 @@ import Settings from "./components/Settings/Settings";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // App - главная компонента, которая содержит в себе роутинг (переход по вкладкам приложения) и сами компоненты(отдельные "страницы" приложения)
-function App(props) {
+function App() {
   return (
     <BrowserRouter>
       <div className="app-wrapper">
         <Header />
-        <Navbar state={props.state} />
+        <Navbar />
         <div className="app-wrapper-content">
           <Routes>
-            <Route path="/profile" element={<Profile store={props.store} />} />
+            <Route path="/profile" element={<Profile />} />
             <Route
               path="/messages/*"
-              element={<MessagesContainer store={props.store} />}
+              element={<MessagesContainer />}
             />
             <Route path="/music" element={<Music />} />
             <Route path="/news" element={<News />} />
