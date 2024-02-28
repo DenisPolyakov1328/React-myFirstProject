@@ -9,7 +9,8 @@ import {Provider} from 'react-redux';
 const root = ReactDOM.createRoot(document.getElementById("root")); // добавляем данные в index.html, чтобы отбразить страницу
 
 // Далее рендерим страницу подгружая главную компоненту App. Затем создали оболочку/функцию чтобы перерисовать UI после  изменения state
-let rerenderEntireTree = (state) => {
+// Импортировали компонент провайдер, и обернули в нее главную компоненту App. Сделано это для того чтобы дочерние компоненты через (под капотом) context API, могли сразу обращатся к стору.
+let rerenderEntireTree = () => {
   root.render(
     <React.StrictMode>
       <Provider store={store}>
