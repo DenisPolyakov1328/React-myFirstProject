@@ -24,19 +24,25 @@ const initialState = {
 };
 
 //Функция reducer в которую передаем параметры стейт и экшен. Создаются как отдельные файлы/модули, чтобы не рос код, так как функций dispatch будет много. По своей сути данная функция следит за изменением UI (полем ввода в textarea) и добавляет новые данные в стейт 
+// Создаем переменную stateCopy, для того чтобы сделать глубокую копию объекта state. Копия объекта делается для того чтобы не изменять дефолтный стейт. Имьютабельность - принцип чистых функций
 const messageReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_MESSAGE:
+    case ADD_MESSAGE: {
       let message = {
         id: "6",
         message: state.newMessageText,
       };
-      state.messageData.push(message);
-      state.newMessageText = "";
-      return state;
-    case UPDATE_NEW_MESSAGE_TEXT:
-      state.newMessageText = action.newText;
-      return state;
+      let stateCopy = {...state}; // поверхнотсная копия стейт
+      stateCopy.messageData = [...state.messageData]; // копируем массив так как будем производить изменения в этой части
+      stateCopy.messageData.push(message);
+      stateCopy.newMessageText = "";
+      return stateCopy;
+    }
+    case UPDATE_NEW_MESSAGE_TEXT: {
+      let stateCopy = {...state};
+      stateCopy.newMessageText = action.newText;
+      return stateCopy;
+    }
     default:
       return state;
   }

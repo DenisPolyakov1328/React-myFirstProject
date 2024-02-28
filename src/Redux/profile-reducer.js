@@ -12,18 +12,23 @@ const initialState = {
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     // Callback для взаимодействия с textarea на странице профиля и добавления новых постов. Т.е. добавляем новый пост в state и на страницу
-    case ADD_POST:
+    case ADD_POST: {
       let post = {
         id: 3,
         message: state.newPostText,
         likecount: "0",
       };
-      state.postData.push(post);
-      state.newPostText = ""; // зануляем поле ввода
-      return state;
-    case UPDATE_NEW_POST_TEXT: // Функция для добавления каждого символа введенного в textarea в state
-      state.newPostText = action.newText;
-      return state;
+      let stateCopy = {...state}; 
+      stateCopy.postData = [...state.postData];
+      stateCopy.postData.push(post);
+      stateCopy.newPostText = ""; // зануляем поле ввода
+      return stateCopy;
+    } 
+    case UPDATE_NEW_POST_TEXT: {// Функция для добавления каждого символа введенного в textarea в state
+      let stateCopy = {...state};
+      stateCopy.newPostText = action.newText;
+      return stateCopy;
+    }  
     default:
       return state;
   }
