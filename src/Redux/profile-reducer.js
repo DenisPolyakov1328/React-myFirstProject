@@ -18,16 +18,17 @@ const profileReducer = (state = initialState, action) => {
         message: state.newPostText,
         likecount: "0",
       };
-      let stateCopy = {...state}; 
-      stateCopy.postData = [...state.postData];
-      stateCopy.postData.push(post);
-      stateCopy.newPostText = ""; // зануляем поле ввода
-      return stateCopy;
+      return {
+        ...state,
+        newPostText: "",
+        postData: [...state.postData, post]
+      }
     } 
     case UPDATE_NEW_POST_TEXT: {// Функция для добавления каждого символа введенного в textarea в state
-      let stateCopy = {...state};
-      stateCopy.newPostText = action.newText;
-      return stateCopy;
+      return {
+        ...state,
+        newPostText: action.newText
+      }
     }  
     default:
       return state;

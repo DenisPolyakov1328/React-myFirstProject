@@ -32,16 +32,27 @@ const messageReducer = (state = initialState, action) => {
         id: "6",
         message: state.newMessageText,
       };
-      let stateCopy = {...state}; // поверхнотсная копия стейт
-      stateCopy.messageData = [...state.messageData]; // копируем массив так как будем производить изменения в этой части
-      stateCopy.messageData.push(message);
-      stateCopy.newMessageText = "";
-      return stateCopy;
-    }
+      return { // Создаем копию объекта state для внесения изменений
+        ...state, // Чрз спред оператор делаем поверхностную копию стейта
+        newMessageText: "", // так же зануляем поле ввода
+        messageData: [...state.messageData, message] // так же делаем копию свойств объекта стейт (в данном случае массив) и добавляем новое значение в массив (равноценно push())
+      }
+      // Верхний код равноценен нижнему
+      // let stateCopy = {...state}; 
+      // stateCopy.messageData = [...state.messageData];
+      // stateCopy.messageData.push(post);
+      // stateCopy.newMessageText = ""; // зануляем поле ввода
+      // return stateCopy;
+    }  
     case UPDATE_NEW_MESSAGE_TEXT: {
-      let stateCopy = {...state};
-      stateCopy.newMessageText = action.newText;
-      return stateCopy;
+      return {
+        ...state, // Чрз спред оператор делаем поверхностную копию стейта
+        newMessageText: action.newText // В обновленный стейт отправляем действие
+      }
+      // Верхний код равноценен нижнему
+      // let stateCopy = {...state};
+      // stateCopy.newMessageText = action.newText;
+      // return stateCopy;
     }
     default:
       return state;
