@@ -1,9 +1,15 @@
-const FOLLOW = "FOLLOW";
-const UNFOLLOW = "UNFOLLOW";
-const SET_USERS = "SET_USERS";
+const FOLLOW = 'FOLLOW';
+const UNFOLLOW = 'UNFOLLOW';
+const SET_USERS = 'SET_USERS';
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const SET_USERS_TOTAL_COUNT = 'SET_USERS_TOTAL_COUNT';
 
+// Начальный стейт. Пустой массив users, что бы потом в него вставить данные пришедшие с сервера. Далее свойства требуемые для оформления pagination (многостраничного вывода пользователей так как их будет много): pageSize - это количество выводимых пользователей на страницу; userTotalCount - это общее число пользователей. 
 const initialState = {
-  users: []
+  users: [],
+  pageSize: 5, //кол-во выводимых пользователей на страницу
+  totalUsersCount: 0, // общее кол-во пользователей
+  currentPage: 1 // текущяя страница
 };
 
 // Описание дествий follow/unfollow, делаем поверхностную копию state, далее перебираем массив с помощью метода map делая копию массива users, пишем условие если user.id равен userId пришедшему из action(действия пользователя, по какому user нажал кнопку), то возвращаем копию user с флагом true/false, если нет возвращаем user без изменений.
@@ -33,6 +39,12 @@ const usersReducer = (state = initialState, action) => {
     case SET_USERS: {
       return { ...state, users: [ ...action.users]} //users: [...state.users, ...action.users] удалил первоначальный стейт
     }
+    case SET_CURRENT_PAGE: {
+      return { ...state, currentPage: action.currentPage}
+    }
+    case SET_USERS_TOTAL_COUNT: {
+      return { ...state, totalUsersCount: action.count}
+    }
     default:
       return state;
   }
@@ -42,5 +54,8 @@ const usersReducer = (state = initialState, action) => {
 export const followActionCreator = (userId) => ({ type: FOLLOW, userId });
 export const unfollowActionCreator = (userId) => ({ type: UNFOLLOW, userId });
 export const setUsersActionCreator = (users) => ({ type: SET_USERS, users });
+export const setCurrentPageActionCreator = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage });
+export const setUsersTotalCountActionCreator = (totalUsersCount) => ({ type: SET_USERS_TOTAL_COUNT, count: totalUsersCount });
+
 
 export default usersReducer;

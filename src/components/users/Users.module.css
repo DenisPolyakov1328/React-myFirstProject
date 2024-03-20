@@ -4,3 +4,15 @@
     object-fit: cover;
     border-radius: 50%;
 }
+
+.number {
+    padding-right: 10px;
+    cursor: pointer;
+}
+
+.selectedPage {
+    font-weight: 500;
+    margin-right: 10px;
+    border: solid;
+    padding: 5px;
+}
