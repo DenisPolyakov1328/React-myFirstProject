@@ -22,7 +22,7 @@ class UsersContainer extends React.Component {
       });
   }
 
-  onPostChanged = (pageNumber) => {
+  onPageChanged = (pageNumber) => {
     this.props.setCurrentPage(pageNumber);
     axios
       .get(
@@ -39,7 +39,7 @@ class UsersContainer extends React.Component {
         totalUsersCount={this.props.totalUsersCount}
         pageSize={this.props.pageSize}
         currentPage={this.props.currentPage}
-        onPostChanged={this.onPostChanged}
+        onPageChanged={this.onPageChanged}
         users={this.props.users}
         follow={this.props.follow}
         unfollow={this.props.unfollow}

@@ -5,7 +5,9 @@ const Users = (props) => {
   const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
   let pages = [];
   for (let i = 1; i <= pagesCount; i++) {
-    pages.push(i);
+    if (pages.length < 10) {
+      pages.push(i);
+  }
   }
   
   return (
@@ -17,7 +19,7 @@ const Users = (props) => {
               props.currentPage === page ? cont.selectedPage : cont.number
             }
             onClick={() => {
-              props.onPostChanged(page);
+              props.onPageChanged(page);
             }}
             key={page}
           >
